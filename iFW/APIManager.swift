@@ -99,6 +99,8 @@ class APIManager {
 								for device in cdDevices {
 									device.name = json["devices"][device.deviceID!]["name"].stringValue
 									
+									CDManager.sharedManager.saveCoreData(nil)
+									
 									let firmwares = json["devices"][device.deviceID!]["firmwares"].array!
 									// BuildID : {version: "X.X", releasedate: "yyyy-MM-dd'T'HH:mm:ss'Z'", signed: bool, filename: "blah.ipsw"}
 									var formattedFirmwares = Dictionary<String, Dictionary<String, AnyObject>>()
@@ -114,9 +116,40 @@ class APIManager {
 									}
 									
 									// Oops, another loop????
-									// Also consistency pls with brackets and <>
-									for firmware in device.firmwares?.allObjects as! [Device] {
+									// TODO: Also consistency pls with brackets and <>
+									for firmware in device.firmwares?.allObjects as! [Firmware] {
+										if Array(formattedFirmwares.keys).contains(firmware.buildID!) {
+											
+											firmware.signed = formattedFirmwares[firmware.buildID!]!["signed"] as! Bool
+											firmware.filename = (formattedFirmwares[firmware.buildID!]!["filename"] as! String)
+											
+											formattedFirmwares.removeValueForKey(firmware.buildID!)
+											CDManager.sharedManager.saveCoreData(nil)
+										}
+									}
+									
+									// Last loop for any new firmwares
+									// Yes, another one
+									for firmware in Array(formattedFirmwares.keys) {
+										let currentFirmware = formattedFirmwares[firmware]!
 										
+										let newFirmware = NSEntityDescription.insertNewObjectForEntityForName("Firmware", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Firmware
+										
+										newFirmware.device = device
+										newFirmware.buildID = firmware
+										newFirmware.version = (currentFirmware["version"] as! String)
+										newFirmware.filename = (currentFirmware["filename"] as! String)
+										newFirmware.signed = currentFirmware["signed"] as! Bool
+										let stringDate = currentFirmware["releasedate"] as! String
+										
+										let dateFormatter = NSDateFormatter()
+										dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+										dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+										
+										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
+										
+										CDManager.sharedManager.saveCoreData(nil)
+
 									}
 									
 									CDManager.sharedManager.saveCoreData(nil)
