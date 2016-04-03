@@ -4,7 +4,7 @@
         <attribute name="deviceCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deviceID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="firmwares" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Firmware" inverseName="device" inverseEntity="Firmware" syncable="YES"/>
+        <relationship name="firmwares" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Firmware" inverseName="device" inverseEntity="Firmware" syncable="YES"/>
     </entity>
     <entity name="Firmware" representedClassName=".Firmware" syncable="YES">
         <attribute name="buildID" optional="YES" attributeType="String" syncable="YES"/>
@@ -12,7 +12,7 @@
         <attribute name="releaseDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="signed" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="device" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Device" inverseName="firmwares" inverseEntity="Device" syncable="YES"/>
+        <relationship name="device" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Device" inverseName="firmwares" inverseEntity="Device" syncable="YES"/>
     </entity>
     <elements>
         <element name="Device" positionX="-38" positionY="-58" width="128" height="103"/>
