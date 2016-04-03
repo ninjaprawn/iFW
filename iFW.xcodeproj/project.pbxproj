@@ -101,9 +101,11 @@
 		BC2368711CA913F600B8BAF1 /* iFW */ = {
 			isa = PBXGroup;
 			children = (
-				BC23688D1CA9191B00B8BAF1 /* Core Data Manager */,
 				BC2368871CA913FC00B8BAF1 /* API Manager */,
+				BC23688D1CA9191B00B8BAF1 /* Core Data Manager */,
+				BC90BA101CB1C9E000F4FA67 /* Core Data Objects */,
 				BC2368721CA913F600B8BAF1 /* AppDelegate.swift */,
+				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
 				BC2368741CA913F600B8BAF1 /* ViewController.swift */,
 				BC2368761CA913F600B8BAF1 /* Main.storyboard */,
 				BC23687C1CA913F600B8BAF1 /* Assets.xcassets */,
@@ -111,11 +113,6 @@
 				BC2368811CA913F600B8BAF1 /* Info.plist */,
 				BC2368791CA913F600B8BAF1 /* iFW.xcdatamodeld */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
-				BC1D83111CAA80B50053DD3F /* Device+CoreDataProperties.swift */,
-				BC1D83121CAA80B50053DD3F /* Device.swift */,
-				BC1D83131CAA80B50053DD3F /* Firmware+CoreDataProperties.swift */,
-				BC1D83141CAA80B50053DD3F /* Firmware.swift */,
-				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
 			);
 			path = iFW;
 			sourceTree = "<group>";
@@ -135,6 +132,17 @@
 				BC23688E1CA9192E00B8BAF1 /* CDManager.swift */,
 			);
 			name = "Core Data Manager";
+			sourceTree = "<group>";
+		};
+		BC90BA101CB1C9E000F4FA67 /* Core Data Objects */ = {
+			isa = PBXGroup;
+			children = (
+				BC1D83111CAA80B50053DD3F /* Device+CoreDataProperties.swift */,
+				BC1D83121CAA80B50053DD3F /* Device.swift */,
+				BC1D83131CAA80B50053DD3F /* Firmware+CoreDataProperties.swift */,
+				BC1D83141CAA80B50053DD3F /* Firmware.swift */,
+			);
+			name = "Core Data Objects";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
