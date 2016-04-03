@@ -1,4 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15D21" minimumToolsVersion="Automatic">
+    <entity name="Device" representedClassName=".Device" syncable="YES">
+        <attribute name="deviceCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deviceID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="firmwares" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Firmware" inverseName="device" inverseEntity="Firmware" syncable="YES"/>
+    </entity>
+    <entity name="Firmware" representedClassName=".Firmware" syncable="YES">
+        <attribute name="buildID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="filename" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="releaseDate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="signed" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="version" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="device" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Device" inverseName="firmwares" inverseEntity="Device" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Device" positionX="-38" positionY="-58" width="128" height="103"/>
+        <element name="Firmware" positionX="216" positionY="-54" width="128" height="133"/>
+    </elements>
 </model>
