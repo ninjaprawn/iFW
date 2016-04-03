@@ -95,6 +95,8 @@ class APIManager {
 								}
 							// Exists!
 							} else {
+								
+								// WARNING: Does not currently add new devices. Fix pls
 								let cdDevices = CDManager.sharedManager.fetchedResultsController.fetchedObjects as! [Device]
 								for device in cdDevices {
 									device.name = json["devices"][device.deviceID!]["name"].stringValue
