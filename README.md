@@ -1,5 +1,8 @@
 # iFW
 
+*NOTE:* Thinking of switching from CoreData to Realm, not too sure
+Also, I'm currently using Alamofire and SwiftyJSON
+
 iOS app for ipsw.me
 
 Includes notifications and stuff
