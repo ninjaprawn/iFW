@@ -47,24 +47,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MsB-Bj-2Jn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2814" y="327"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Ex2-m8-uWX">
-            <objects>
-                <navigationController id="0Gt-m3-kEo" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="aD0-Aq-QQt"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FgU-Gk-30K">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="Mau-fa-Wc1" kind="relationship" relationship="rootViewController" id="PTd-Sd-SQQ"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="LFN-NP-LL6" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1994" y="327"/>
+            <point key="canvasLocation" x="1974" y="327"/>
         </scene>
         <!--Devices-->
         <scene sceneID="qbo-sA-H2y">
@@ -98,6 +81,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="Mau-fa-Wc1" kind="show" identifier="deviceFirmwares" id="1Wn-Yl-ERp"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -106,9 +92,6 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Devices" id="iDL-uu-KDa"/>
-                    <connections>
-                        <segue destination="0Gt-m3-kEo" kind="showDetail" identifier="deviceFirmwares" id="DfD-1h-8Xb"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17y-1F-Nk7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

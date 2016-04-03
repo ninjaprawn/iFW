@@ -36,7 +36,7 @@ class ViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath)
 		
 		if let fetchedObjects = CDManager.sharedManager.fetchedResultsController.fetchedObjects {
-			cell.textLabel?.text = (fetchedObjects[indexPath.row] as! Device).deviceID
+			cell.textLabel?.text = (fetchedObjects[indexPath.row] as! Device).name
 			cell.detailTextLabel?.text = "\((fetchedObjects[indexPath.row] as! Device).firmwares!.count)"
 		} else {
 			cell.textLabel?.text = "No Devices Found in CD"
@@ -52,15 +52,11 @@ class ViewController: UITableViewController {
 		}
 		return "Count: 0"
 	}
-	
-	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-		self.performSegueWithIdentifier("deviceFirmwares", sender: indexPath)
-	}
-	
+
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "deviceFirmwares" {
-			let destinationViewController = (segue.destinationViewController as! UINavigationController).childViewControllers[0] as! FirmwareTableViewController
-			let index = (sender as! NSIndexPath).row
+			let destinationViewController = segue.destinationViewController as! FirmwareTableViewController
+			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
 			destinationViewController.device = CDManager.sharedManager.fetchedResultsController.fetchedObjects![index] as! Device
 		}
 	}
