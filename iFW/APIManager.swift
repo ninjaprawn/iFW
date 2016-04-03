@@ -109,10 +109,10 @@ class APIManager {
 									
 									let firmwares = json["devices"][device.deviceID!]["firmwares"].array!
 									// BuildID : {version: "X.X", releasedate: "yyyy-MM-dd'T'HH:mm:ss'Z'", signed: bool, filename: "blah.ipsw"}
-									var formattedFirmwares = Dictionary<String, Dictionary<String, AnyObject>>()
+									var formattedFirmwares = [String: [String: AnyObject]]()
 									
 									for firmware in firmwares {
-										var currentFirmware = Dictionary<String, AnyObject>()
+										var currentFirmware = [String: AnyObject]()
 										currentFirmware["version"] = firmware["version"].stringValue
 										currentFirmware["filename"] = firmware["filename"].stringValue
 										currentFirmware["releasedate"] = firmware["releasedate"].stringValue
@@ -122,7 +122,6 @@ class APIManager {
 									}
 									
 									// Oops, another loop????
-									// TODO: Also consistency pls with brackets and <>
 									for firmware in device.firmwares?.allObjects as! [Firmware] {
 										if Array(formattedFirmwares.keys).contains(firmware.buildID!) {
 											
