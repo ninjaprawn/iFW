@@ -69,7 +69,7 @@ class APIManager {
 							if !self.shaExists() {
 								let devices = Array(json["devices"].dictionary!.keys)
 								
-								// TODO: Better CoreData Management
+								// TODO: Better CoreData Management -> Realm
 								for device in devices {
 									let newDevice = NSEntityDescription.insertNewObjectForEntityForName("Device", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Device
 									
