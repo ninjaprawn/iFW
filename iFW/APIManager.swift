@@ -49,10 +49,10 @@ class APIManager {
 		
 		// Specifying the Headers we need
 		manager.session.configuration.HTTPAdditionalHeaders = [
-			"User-Agent": "iOS/iFW-1.0b1"
+			"User-Agent": "iOS/iFW-beta"
 		]
 		
-		manager.request(.GET, "https://api.ipsw.me/v2.1/firmwares.json/condensed").responseJSON(completionHandler: { response in
+		/*manager.request(.GET, "https://api.ipsw.me/v2.1/firmwares.json/condensed").responseJSON(completionHandler: { response in
 			switch response.result {
 				case .Success:
 					if let value = response.result.value {
@@ -60,8 +60,10 @@ class APIManager {
 							print("Data is the same! Don't need to do anything")
 						} else {
 							NSUserDefaults.standardUserDefaults().setObject(response.data!.sha1.hexString, forKey: "firmwares.json.sha1")
-							let json = JSON(value)
-							
+							let json = JSON(value)*/
+		
+		let json = JSON(data: NSFileManager.defaultManager().contentsAtPath(NSBundle.mainBundle().bundlePath.stringByAppendingString("/condensed.json"))!)
+		NSUserDefaults.standardUserDefaults().setObject(NSFileManager.defaultManager().contentsAtPath(NSBundle.mainBundle().bundlePath.stringByAppendingString("/condensed.json"))!.sha1.hexString, forKey: "firmwares.json.sha1")
 							// First time?
 							if !self.shaExists() {
 								let devices = Array(json["devices"].dictionary!.keys)
@@ -95,10 +97,11 @@ class APIManager {
 								}
 							// Exists!
 							} else {
+								var devices = Array(json["devices"].dictionary!.keys)
 								
-								// WARNING: Does not currently add new devices. Fix pls
 								let cdDevices = CDManager.sharedManager.fetchedResultsController.fetchedObjects as! [Device]
 								for device in cdDevices {
+									devices.removeAtIndex(devices.indexOf(device.deviceCode!)!)
 									device.name = json["devices"][device.deviceID!]["name"].stringValue
 									
 									CDManager.sharedManager.saveCoreData(nil)
@@ -156,14 +159,43 @@ class APIManager {
 									
 									CDManager.sharedManager.saveCoreData(nil)
 								}
+								
+								// Remaining devices
+								for device in devices {
+									let newDevice = NSEntityDescription.insertNewObjectForEntityForName("Device", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Device
+									
+									newDevice.deviceID = device
+									newDevice.deviceCode = json["devices"][device]["BoardConfig"].stringValue
+									newDevice.name = json["devices"][device]["name"].stringValue
+									
+									for firmware in json["devices"][device]["firmwares"].array! {
+										let newFirmware = NSEntityDescription.insertNewObjectForEntityForName("Firmware", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Firmware
+										
+										newFirmware.device = newDevice
+										newFirmware.buildID = firmware["buildid"].stringValue
+										newFirmware.version = firmware["version"].stringValue
+										newFirmware.filename = firmware["filename"].stringValue
+										newFirmware.signed = firmware["signed"].boolValue
+										let stringDate = firmware["releasedate"].stringValue
+										
+										let dateFormatter = NSDateFormatter()
+										dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+										dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+										
+										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
+										
+										CDManager.sharedManager.saveCoreData(nil)
+									}
+								}
 							}
-						}
+						/*}
 					}
+
 				case .Failure(_):
 					debugPrint(response)
 			}
 			print("Finished!")
-		})
+		})*/
 		
 	}
 	
