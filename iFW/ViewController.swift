@@ -14,7 +14,10 @@ class ViewController: UITableViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
-		APIManager().downloadInfo()
+		dispatch_async(dispatch_get_main_queue(), {
+			APIManager().downloadInfo()
+		})
+		
 		//APIManager().coreDataToJson()
 	}
 
@@ -51,6 +54,10 @@ class ViewController: UITableViewController {
 			return "Count: \(fetchedObjects.count)"
 		}
 		return "Count: 0"
+	}
+	
+	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
