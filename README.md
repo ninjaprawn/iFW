@@ -1,16 +1,34 @@
 # iFW
 
-*NOTE:* Thinking of switching from CoreData to Realm, not too sure
-Also, I'm currently using Alamofire and SwiftyJSON
+App for <a href="https://ipsw.me/">ipsw.me</a>
 
-iOS app for ipsw.me
+State of Project
+----------
+Project is currently 40% on the way. Currently converting CoreData to Realm.
+Need to add custom design, Push Notifications, better API.
+ETA: 15/04/16
 
-Includes notifications and stuff
+Building
+----------
+First, either download the repo or clone it:
+```bash
+git clone https://github.com/ninjaprawn/iFW.git
+```
 
-A lot of stuff todo, got basic API manager working, CoreData main target right now.
+Then install with CocoaPods:
+```bash
+pod install
+```
 
-MIT cause I don't own any info here, and don't really care what you do with it.
+Libraries/Frameworks
+----------
 
-If you do reuse some parts (APIManager), think about dropping a small credit or whatever.
+iFW uses the following libraries/frameworks:
+- Alamofire
+- SwiftyJSON
+- SwiftRSS
+- Realm
 
-Uses CocoaPods, so pod install when you dl.
+License
+----------
+MIT license. So just don't recompile and ship it under your own name. If you do use components from this project, just credit me :)
