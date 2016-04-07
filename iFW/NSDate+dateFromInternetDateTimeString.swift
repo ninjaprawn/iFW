@@ -71,6 +71,16 @@ extension NSDate {
 
                 date = NSDate.internetDateFormatter.dateFromString(rfc822_string as String)
             }
+			if date == nil {
+				NSDate.internetDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'BST'"
+				
+				date = NSDate.internetDateFormatter.dateFromString(rfc822_string as String)
+			}
+			if date == nil {
+				NSDate.internetDateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss 'GMT'"
+				
+				date = NSDate.internetDateFormatter.dateFromString(rfc822_string as String)
+			}
         }
         else
         {
