@@ -10,7 +10,6 @@
 		BC2368731CA913F600B8BAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368721CA913F600B8BAF1 /* AppDelegate.swift */; };
 		BC2368751CA913F600B8BAF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368741CA913F600B8BAF1 /* ViewController.swift */; };
 		BC2368781CA913F600B8BAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2368761CA913F600B8BAF1 /* Main.storyboard */; };
-		BC23687B1CA913F600B8BAF1 /* iFW.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BC2368791CA913F600B8BAF1 /* iFW.xcdatamodeld */; };
 		BC23687D1CA913F600B8BAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC23687C1CA913F600B8BAF1 /* Assets.xcassets */; };
 		BC2368801CA913F600B8BAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */; };
 		BC2368891CA9151500B8BAF1 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368881CA9151500B8BAF1 /* APIManager.swift */; };
@@ -34,7 +33,6 @@
 		BC2368721CA913F600B8BAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC2368741CA913F600B8BAF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		BC2368771CA913F600B8BAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		BC23687A1CA913F600B8BAF1 /* iFW.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = iFW.xcdatamodel; sourceTree = "<group>"; };
 		BC23687C1CA913F600B8BAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC23687F1CA913F600B8BAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC2368811CA913F600B8BAF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				BC23687C1CA913F600B8BAF1 /* Assets.xcassets */,
 				BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */,
 				BC2368811CA913F600B8BAF1 /* Info.plist */,
-				BC2368791CA913F600B8BAF1 /* iFW.xcdatamodeld */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
 			);
 			path = iFW;
@@ -299,7 +296,6 @@
 				BC33E2F41CB2197A00E4885B /* String+imageLinksFromHTML.swift in Sources */,
 				BC2368751CA913F600B8BAF1 /* ViewController.swift in Sources */,
 				BC33E2F01CB2197A00E4885B /* NSDate+dateFromInternetDateTimeString.swift in Sources */,
-				BC23687B1CA913F600B8BAF1 /* iFW.xcdatamodeld in Sources */,
 				BC2368731CA913F600B8BAF1 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,19 +455,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		BC2368791CA913F600B8BAF1 /* iFW.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				BC23687A1CA913F600B8BAF1 /* iFW.xcdatamodel */,
-			);
-			currentVersion = BC23687A1CA913F600B8BAF1 /* iFW.xcdatamodel */;
-			path = iFW.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = BC2368671CA913F600B8BAF1 /* Project object */;
 }

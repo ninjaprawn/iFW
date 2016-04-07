@@ -7,19 +7,22 @@
 //
 
 import UIKit
-import CoreData
+import RealmSwift
 
 class ViewController: UITableViewController {
 
+	let realm = try! Realm()
+	var devices: Results<Device>!
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		// Do any additional setup after loading the view, typically from a nib.
 		dispatch_async(dispatch_get_main_queue(), {
-			APIManager().downloadInfo()
-			self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+			APIManager().downloadInfo({
+				self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+			})
 		})
-		
-		//APIManager().coreDataToJson()
+		devices = realm.objects(Device)
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -29,32 +32,33 @@ class ViewController: UITableViewController {
 
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		if let fetchedObjects = CDManager.sharedManager.fetchedResultsController.fetchedObjects {
-			return fetchedObjects.count
+		if devices.count > 0 {
+			return devices.sorted("deviceID").count
 		}
 		return 1
 	}
 	
 	override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		
-		let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath)
-		
-		if let fetchedObjects = CDManager.sharedManager.fetchedResultsController.fetchedObjects {
-			cell.textLabel?.text = (fetchedObjects[indexPath.row] as! Device).name
-			cell.detailTextLabel?.text = "\((fetchedObjects[indexPath.row] as! Device).firmwares!.count)"
+		if devices.count > 0  {
+			let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath)
+			
+			cell.textLabel?.text = devices.sorted("deviceID")[indexPath.row].deviceName
+			cell.detailTextLabel?.text = "\(devices.sorted("deviceID")[indexPath.row].firmwares.count)"
+			
+			return cell
 		} else {
-			cell.textLabel?.text = "No Devices Found in CD"
+			let cell = tableView.dequeueReusableCellWithIdentifier("title", forIndexPath: indexPath)
+			
+			cell.textLabel?.text = "No devices found in Realm"
+			
+			return cell
 		}
-		
-		return cell
 		
 	}
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		if let fetchedObjects = CDManager.sharedManager.fetchedResultsController.fetchedObjects {
-			return "Count: \(fetchedObjects.count)"
-		}
-		return "Count: 0"
+		return "Count: \(devices.count)"
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -65,7 +69,7 @@ class ViewController: UITableViewController {
 		if segue.identifier == "deviceFirmwares" {
 			let destinationViewController = segue.destinationViewController as! FirmwareTableViewController
 			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
-			destinationViewController.device = CDManager.sharedManager.fetchedResultsController.fetchedObjects![index] as! Device
+			destinationViewController.device = devices.sorted("deviceName")[index]
 		}
 	}
 	

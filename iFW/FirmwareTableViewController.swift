@@ -29,17 +29,17 @@ class FirmwareTableViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return device.firmwares!.count
+        return device.firmwares.count
     }
 
 	
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath)
 
-        cell.textLabel?.text = (device.firmwares!.allObjects[indexPath.row] as! Firmware).version
-		cell.detailTextLabel?.text = (device.firmwares!.allObjects[indexPath.row] as! Firmware).buildID
+        cell.textLabel?.text = device.firmwares[indexPath.row].version
+		cell.detailTextLabel?.text = device.firmwares[indexPath.row].buildID
 		
-		if (device.firmwares!.allObjects[indexPath.row] as! Firmware).signed!.boolValue {
+		if device.firmwares[indexPath.row].signed {
 			cell.accessoryType = .Checkmark
 		}
 

@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 import Alamofire
 import SwiftyJSON
 
@@ -43,7 +43,7 @@ extension NSData {
 
 class APIManager {
 	
-	func downloadInfo() {
+	func downloadInfo(callback: (() -> Void)) {
 		
 		let manager = Manager.sharedInstance
 		
@@ -62,30 +62,32 @@ class APIManager {
 						} else {
 							NSUserDefaults.standardUserDefaults().setObject(response.data!.sha1.hexString, forKey: "firmwares.json.sha1")
 							let json = JSON(value)
-		
-							/*let json = JSON(data: NSFileManager.defaultManager().contentsAtPath(NSBundle.mainBundle().bundlePath.stringByAppendingString("/condensed.json"))!)
-							NSUserDefaults.standardUserDefaults().setObject(NSFileManager.defaultManager().contentsAtPath(NSBundle.mainBundle().bundlePath.stringByAppendingString("/condensed.json"))!.sha1.hexString, forKey: "firmwares.json.sha1")*/
 							
 							// First time?
+							let realm = try! Realm()
 							if !self.shaExists() {
 								let devices = Array(json["devices"].dictionary!.keys)
 								
-								// TODO: Better CoreData Management -> Realm
 								for device in devices {
-									let newDevice = NSEntityDescription.insertNewObjectForEntityForName("Device", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Device
+									let newDevice = Device()
 									
 									newDevice.deviceID = device
 									newDevice.deviceCode = json["devices"][device]["BoardConfig"].stringValue
-									newDevice.name = json["devices"][device]["name"].stringValue
+									newDevice.deviceName = json["devices"][device]["name"].stringValue
+									
+									try! realm.write {
+										realm.add(newDevice)
+									}
 									
 									for firmware in json["devices"][device]["firmwares"].array! {
-										let newFirmware = NSEntityDescription.insertNewObjectForEntityForName("Firmware", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Firmware
+										let newFirmware = Firmware()
 										
 										newFirmware.device = newDevice
 										newFirmware.buildID = firmware["buildid"].stringValue
 										newFirmware.version = firmware["version"].stringValue
 										newFirmware.filename = firmware["filename"].stringValue
 										newFirmware.signed = firmware["signed"].boolValue
+										
 										let stringDate = firmware["releasedate"].stringValue
 										
 										let dateFormatter = NSDateFormatter()
@@ -94,21 +96,29 @@ class APIManager {
 										
 										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
 										
-										CDManager.sharedManager.saveCoreData(nil)
+										try! realm.write {
+											realm.add(newFirmware)
+											newDevice.firmwares.append(newFirmware)
+										}
+
 									}
 								}
 							// Exists!
 							} else {
+								
+								// TODO: Make the below process for efficient. 5 loops ain't tooo good.
+								
 								var devices = Array(json["devices"].dictionary!.keys)
 								
-								let cdDevices = CDManager.sharedManager.fetchedResultsController.fetchedObjects as! [Device]
-								for device in cdDevices {
-									devices.removeAtIndex(devices.indexOf(device.deviceID!)!)
-									device.name = json["devices"][device.deviceID!]["name"].stringValue
+								let realmDevices = realm.objects(Device)
+								for device in realmDevices {
+									devices.removeAtIndex(devices.indexOf(device.deviceID)!)
 									
-									CDManager.sharedManager.saveCoreData(nil)
+									try! realm.write {
+										device.deviceName = json["devices"][device.deviceID]["name"].stringValue
+									}
 									
-									let firmwares = json["devices"][device.deviceID!]["firmwares"].array!
+									let firmwares = json["devices"][device.deviceID]["firmwares"].array!
 									// BuildID : {version: "X.X", releasedate: "yyyy-MM-dd'T'HH:mm:ss'Z'", signed: bool, filename: "blah.ipsw"}
 									var formattedFirmwares = [String: [String: AnyObject]]()
 									
@@ -123,14 +133,16 @@ class APIManager {
 									}
 									
 									// Oops, another loop????
-									for firmware in device.firmwares?.allObjects as! [Firmware] {
-										if Array(formattedFirmwares.keys).contains(firmware.buildID!) {
+									for firmware in device.firmwares {
+										if Array(formattedFirmwares.keys).contains(firmware.buildID) {
 											
-											firmware.signed = formattedFirmwares[firmware.buildID!]!["signed"] as! Bool
-											firmware.filename = (formattedFirmwares[firmware.buildID!]!["filename"] as! String)
+											try! realm.write {
+												firmware.signed = formattedFirmwares[firmware.buildID]!["signed"] as! Bool
+												firmware.filename = formattedFirmwares[firmware.buildID]!["filename"] as! String
+											}
+												
+											formattedFirmwares.removeValueForKey(firmware.buildID)
 											
-											formattedFirmwares.removeValueForKey(firmware.buildID!)
-											CDManager.sharedManager.saveCoreData(nil)
 										}
 									}
 									
@@ -139,7 +151,7 @@ class APIManager {
 									for firmware in Array(formattedFirmwares.keys) {
 										let currentFirmware = formattedFirmwares[firmware]!
 										
-										let newFirmware = NSEntityDescription.insertNewObjectForEntityForName("Firmware", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Firmware
+										let newFirmware = Firmware()
 										
 										newFirmware.device = device
 										newFirmware.buildID = firmware
@@ -154,23 +166,28 @@ class APIManager {
 										
 										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
 										
-										CDManager.sharedManager.saveCoreData(nil)
+										try! realm.write {
+											realm.add(newFirmware)
+											device.firmwares.append(newFirmware)
+										}
 
 									}
-									
-									CDManager.sharedManager.saveCoreData(nil)
 								}
 								
 								// Remaining devices
 								for device in devices {
-									let newDevice = NSEntityDescription.insertNewObjectForEntityForName("Device", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Device
+									let newDevice = Device()
 									
 									newDevice.deviceID = device
 									newDevice.deviceCode = json["devices"][device]["BoardConfig"].stringValue
-									newDevice.name = json["devices"][device]["name"].stringValue
+									newDevice.deviceName = json["devices"][device]["name"].stringValue
+									
+									try! realm.write {
+										realm.add(newDevice)
+									}
 									
 									for firmware in json["devices"][device]["firmwares"].array! {
-										let newFirmware = NSEntityDescription.insertNewObjectForEntityForName("Firmware", inManagedObjectContext: CDManager.sharedManager.managedObjectContext!) as! Firmware
+										let newFirmware = Firmware()
 										
 										newFirmware.device = newDevice
 										newFirmware.buildID = firmware["buildid"].stringValue
@@ -185,7 +202,10 @@ class APIManager {
 										
 										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
 										
-										CDManager.sharedManager.saveCoreData(nil)
+										try! realm.write {
+											realm.add(newFirmware)
+											newDevice.firmwares.append(newFirmware)
+										}
 									}
 								}
 							}
@@ -195,7 +215,7 @@ class APIManager {
 				case .Failure(_):
 					debugPrint(response)
 			}
-			print("Finished!")
+			callback()
 		})
 		
 	}
