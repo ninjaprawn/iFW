@@ -52,6 +52,7 @@ class APIManager {
 			"User-Agent": "iOS/iFW-beta"
 		]
 		
+		// TODO: Create an online API type thing, so you can get the data more easily and quickly (openshift > heroku)
 		manager.request(.GET, "https://api.ipsw.me/v2.1/firmwares.json/condensed").responseJSON(completionHandler: { response in
 			switch response.result {
 				case .Success:
