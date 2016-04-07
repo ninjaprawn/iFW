@@ -178,7 +178,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BC2368841CA913F600B8BAF1 /* Build configuration list for PBXNativeTarget "iFW" */;
 			buildPhases = (
-				BCEC60751CB0B9B000ED0252 /* ShellScript */,
+				BCEC60751CB0B9B000ED0252 /* Run Script */,
 				CCE671093A21EB6688BB85DD /* Check Pods Manifest.lock */,
 				BC23686B1CA913F600B8BAF1 /* Sources */,
 				BC23686C1CA913F600B8BAF1 /* Frameworks */,
@@ -258,18 +258,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BCEC60751CB0B9B000ED0252 /* ShellScript */ = {
+		BCEC60751CB0B9B000ED0252 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "TAGS=\"TODO:|FIXME:|WARNING:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
+			shellScript = "TAGS=\"TODO:\"\necho \"searching ${SRCROOT} for ${TAGS}\"\nfind \"${SRCROOT}\" \\( -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\"";
 		};
 		CCE671093A21EB6688BB85DD /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
