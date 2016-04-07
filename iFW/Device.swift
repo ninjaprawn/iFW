@@ -2,16 +2,19 @@
 //  Device.swift
 //  iFW
 //
-//  Created by George Dan on 29/03/2016.
+//  Created by George Dan on 7/04/2016.
 //  Copyright © 2016 George Dan. All rights reserved.
 //
 
 import Foundation
-import CoreData
+import RealmSwift
 
-
-class Device: NSManagedObject {
-
-// Insert code here to add functionality to your managed object subclass
+class Device: Object {
+	
+	dynamic var deviceCode = ""
+	dynamic var deviceID = ""
+	dynamic var deviceName = ""
+	
+	let firmwares = List<Firmware>()
 
 }
