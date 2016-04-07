@@ -4,7 +4,7 @@ App for <a href="https://ipsw.me/">ipsw.me</a>
 
 State of Project
 ----------
-Project is currently 40% on the way. Currently converting CoreData to Realm.
+Project is currently 50% on the way. Currently on custom design.
 Need to add custom design, Push Notifications, better API.
 ETA: 15/04/16
 
