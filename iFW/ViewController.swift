@@ -16,6 +16,7 @@ class ViewController: UITableViewController {
 		// Do any additional setup after loading the view, typically from a nib.
 		dispatch_async(dispatch_get_main_queue(), {
 			APIManager().downloadInfo()
+			self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
 		})
 		
 		//APIManager().coreDataToJson()
