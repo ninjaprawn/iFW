@@ -71,6 +71,10 @@ class ViewController: UITableViewController {
 			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
 			destinationViewController.device = devices.sorted("deviceName")[index]
 		}
+		
+		let backItem = UIBarButtonItem()
+		backItem.title = ""
+		navigationItem.backBarButtonItem = backItem
 	}
 	
 }
