@@ -68,5 +68,17 @@ class NewsTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
+	
+	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+		if segue.identifier == "postDetail" {
+			let destVC = segue.destinationViewController as! NewsDetailTableViewController
+			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
+			destVC.post = items[index]
+		}
+		
+		let backItem = UIBarButtonItem()
+		backItem.title = ""
+		navigationItem.backBarButtonItem = backItem
+	}
 
 }

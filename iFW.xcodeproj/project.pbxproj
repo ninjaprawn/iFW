@@ -21,6 +21,7 @@
 		BCA2F6DC1CAD10D000EF3DEB /* FirmwareTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */; };
 		BCA4C4661CAF382500B8BF89 /* condensed.json in Resources */ = {isa = PBXBuildFile; fileRef = BCA4C4651CAF382500B8BF89 /* condensed.json */; };
 		BCBFFE441CB1EFFF00774B09 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */; };
+		BCC8C4021CB7C14B004B446A /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */; };
 		BCED75761CB6674000F6E00F /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED75751CB6674000F6E00F /* Device.swift */; };
 		BCED75781CB6690100F6E00F /* Firmware.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCED75771CB6690100F6E00F /* Firmware.swift */; };
 		FA2EDC4515DA770E7773A597 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0DC13062FF210198DFE806AA /* Pods.framework */; };
@@ -46,6 +47,7 @@
 		BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirmwareTableViewController.swift; sourceTree = "<group>"; };
 		BCA4C4651CAF382500B8BF89 /* condensed.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = condensed.json; path = ifw.xcappdata/AppData/Documents/condensed.json; sourceTree = "<group>"; };
 		BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
+		BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
 		BCED75751CB6674000F6E00F /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		BCED75771CB6690100F6E00F /* Firmware.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Firmware.swift; sourceTree = "<group>"; };
 		DCFE080160018AEC872778E1 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */,
 				BC2368811CA913F600B8BAF1 /* Info.plist */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
+				BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */,
 			);
 			path = iFW;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				BCA2F6DC1CAD10D000EF3DEB /* FirmwareTableViewController.swift in Sources */,
 				BC33E2F21CB2197A00E4885B /* RSSItem.swift in Sources */,
 				BC33E2F31CB2197A00E4885B /* RSSParser.swift in Sources */,
+				BCC8C4021CB7C14B004B446A /* NewsDetailTableViewController.swift in Sources */,
 				BC2368891CA9151500B8BAF1 /* APIManager.swift in Sources */,
 				BCED75761CB6674000F6E00F /* Device.swift in Sources */,
 				BCBFFE441CB1EFFF00774B09 /* NewsTableViewController.swift in Sources */,
