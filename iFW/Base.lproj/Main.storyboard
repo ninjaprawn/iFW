@@ -60,10 +60,10 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="newsCell" rowHeight="80" id="aj7-uL-ksE">
-                                <rect key="frame" x="0.0" y="113.5" width="600" height="80"/>
+                                <rect key="frame" x="0.0" y="114" width="600" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aj7-uL-ksE" id="WNY-iz-180">
-                                    <rect key="frame" x="0.0" y="0.0" width="567" height="79.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="567" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Feed Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vgj-6W-HsP">
@@ -107,11 +107,13 @@
             </objects>
             <point key="canvasLocation" x="2079" y="-360"/>
         </scene>
-        <!--News-->
+        <!--Navigation Controller-->
         <scene sceneID="gsZ-PE-b9W">
             <objects>
                 <navigationController id="GEi-ty-BKu" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="News" id="S1z-wa-K7U"/>
+                    <tabBarItem key="tabBarItem" title="" image="news" id="S1z-wa-K7U">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
+                    </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qlq-Nn-MY0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -189,11 +191,13 @@
             </objects>
             <point key="canvasLocation" x="2079" y="327"/>
         </scene>
-        <!--Devices-->
+        <!--Navigation Controller-->
         <scene sceneID="Jqk-gA-d2n">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="whu-e3-mrM" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Devices" id="mRI-Jb-xOn"/>
+                    <tabBarItem key="tabBarItem" title="" image="phone" id="mRI-Jb-xOn">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="51e-1a-DKX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -227,4 +231,8 @@
             <point key="canvasLocation" x="487" y="-27"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="news" width="22" height="22"/>
+        <image name="phone" width="22" height="22"/>
+    </resources>
 </document>
