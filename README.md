@@ -4,8 +4,8 @@ App for <a href="https://ipsw.me/">ipsw.me</a>
 
 State of Project
 ----------
-Project is currently 50% on the way. Currently on custom design.
-Need to add custom design, Push Notifications, better API.
+Project is currently 60% on the way. Currently on Push Notifications.
+Need to add Push Notifications, better API. Then bug fixes/enhancements.
 ETA: 15/04/16
 
 Building
