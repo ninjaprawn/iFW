@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
 				self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
 			})
 		})
-		devices = realm.objects(Device)
+		devices = realm.objects(Device).sorted("deviceName")
 	}
 
 	override func didReceiveMemoryWarning() {
@@ -33,7 +33,7 @@ class ViewController: UITableViewController {
 
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if devices.count > 0 {
-			return devices.sorted("deviceID").count
+			return devices.count
 		}
 		return 1
 	}
@@ -43,8 +43,8 @@ class ViewController: UITableViewController {
 		if devices.count > 0  {
 			let cell = tableView.dequeueReusableCellWithIdentifier("detail", forIndexPath: indexPath)
 			
-			cell.textLabel?.text = devices.sorted("deviceID")[indexPath.row].deviceName
-			cell.detailTextLabel?.text = "\(devices.sorted("deviceID")[indexPath.row].firmwares.count)"
+			cell.textLabel?.text = devices[indexPath.row].deviceName
+			cell.detailTextLabel?.text = "\(devices[indexPath.row].firmwares.count)"
 			
 			return cell
 		} else {
@@ -69,7 +69,7 @@ class ViewController: UITableViewController {
 		if segue.identifier == "deviceFirmwares" {
 			let destinationViewController = segue.destinationViewController as! FirmwareTableViewController
 			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
-			destinationViewController.device = devices.sorted("deviceName")[index]
+			destinationViewController.device = devices[index]
 		}
 		
 		let backItem = UIBarButtonItem()
