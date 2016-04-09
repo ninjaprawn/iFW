@@ -10,9 +10,7 @@ Project is currently 65% on the way. Currently on Push Notifications handling.
 Need to add Push Notifications handling, better API. Then bug fixes/enhancements.
 ETA: 15/04/16
 
-Turns out PN was pretty easy, it's just how to send the notifications based on new content from the updates feed that will be a challenge. 
-
-NOTE: I will probably **not** open source the handling and the custom api until I clean it up and make it look good.
+Note: I will be working on primarily the push notification handlers and api, but you might see some small changes in the files as I transition to my stuff to the app.
 
 Building
 ----------
@@ -34,6 +32,7 @@ iFW uses the following libraries/frameworks:
 - SwiftyJSON
 - SwiftRSS
 - Realm
+- OneSignal
 
 License
 ----------
