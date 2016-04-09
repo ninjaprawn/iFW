@@ -10,5 +10,6 @@
 #define Bridging_h
 
 #import <CommonCrypto/CommonCrypto.h>
+#import <OneSignal/OneSignal.h>
 
 #endif /* Bridging_h */

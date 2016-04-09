@@ -48,6 +48,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName:UIColor(red: 127/255, green: 140/255, blue: 141/255, alpha: 1.0)], forState: .Normal)
 		UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName:UIColor(red: 44/255, green: 62/255, blue: 80/255, alpha: 1.0)], forState: .Selected)
 		
+		
+		// Push notification stuff (ty peter)
+		let oneSignal = OneSignal(launchOptions: launchOptions, appId: "Go away", handleNotification: nil)
+  
+		OneSignal.defaultClient().enableInAppAlertNotification(true)
+		requestPushes()
+		
+		application.applicationIconBadgeNumber = 0
+		application.cancelAllLocalNotifications()
+		
 		return true
 	}
 
@@ -72,6 +82,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func applicationWillTerminate(application: UIApplication) {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 		// Saves changes in the application's managed object context before the application terminates.
+	}
+	
+	
+	// This is from https://github.com/dzt/ftp/blob/master/ios/FTP/AppDelegate.swift.
+	
+	func requestPushes() {
+		
+		let settings = UIUserNotificationSettings(forTypes: [.Badge, .Alert], categories: nil)
+		UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+		UIApplication.sharedApplication().registerForRemoteNotifications()
+	}
+	
+	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+		print(deviceToken.description)
+		
+	}
+	
+	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
+		print(error)
 	}
 
 }
