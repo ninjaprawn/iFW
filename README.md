@@ -2,6 +2,8 @@
 
 App for <a href="https://ipsw.me/">ipsw.me</a>
 
+Thanks to <a href="https://twitter.com/pxtvr">peter</a> for the help and motivation (not directly, but still, ty)
+
 State of Project
 ----------
 Project is currently 65% on the way. Currently on Push Notifications handling.
