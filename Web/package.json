@@ -1,0 +1,33 @@
+{
+  "name": "iFW-web",
+  "version": "1.0.0",
+  "description": "iFW API and Push Notification handler",
+  "keywords": [
+    "iFW",
+    "Node.js",
+    "application"
+  ],
+  "author": {
+    "name": "George Dan",
+    "email": "george@ninjaprawn.com",
+    "url": "http://www.ninjaprawn.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openshift/origin-server"
+  },
+
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+
+  "dependencies": {
+    "express": "~3.4.4"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+
+  "private": true,
+  "main": "server.js"
+}
