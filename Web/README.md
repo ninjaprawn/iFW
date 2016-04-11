@@ -4,6 +4,8 @@ This part of the project consists of two parts: Push Notification handler and th
 
 NOTE: Both components are made with Node.js, using the REST api from OneSignal to push notifications and X for rss parsing.
 
+The cron jobs are located in <code>.openshift/cron/hourly/</code>
+
 Push Notification Handler
 ----------
 This is pretty much a cron job that runs hourly. It caches the most recent post. If the post isn't the recent one on refresh, the app gets the data, processes it and sends the notifications out. The latest post is cached. 
