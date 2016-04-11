@@ -2,7 +2,11 @@
 
 This part of the project consists of two parts: Push Notification handler and the API
 
-NOTE: Both components are made with Node.js, using the REST api from OneSignal to push notifications and X for rss parsing.
+NOTE: Both components are made with Node.js, using the REST api from OneSignal to push notifications and <code>fast-feed</code> for rss parsing. To install fast-feed, cd into this directory and:
+
+```bash
+npm install fast-feed
+```
 
 The cron jobs are located in <code>.openshift/cron/hourly/</code>
 
