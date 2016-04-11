@@ -18,7 +18,7 @@ First, either download the repo or clone it:
 git clone https://github.com/ninjaprawn/iFW.git
 ```
 
-Then install with CocoaPods:
+Then install with CocoaPods (you need to have <a href="https://cocoapods.org/">cocoapods</a> and <a href="https://github.com/orta/cocoapods-keys">cocoapods-keys</a> installed):
 ```bash
 pod install
 ```
