@@ -16,18 +16,20 @@ class NewsTableViewController: UITableViewController {
         super.viewDidLoad()
 
 		// TODO: Rewrite RSSParser for just this case. Sideproject - Rewrite SwiftRSS and maintain it
-		let request: NSURLRequest = NSURLRequest(URL: NSURL(string: "https://ipsw.me/updates.rss")!)
-		RSSParser.parseFeedForRequest(request, callback: { (feed, error) in
-			guard let feed = feed else {
-				print(error)
-				return
-			}
-			
-			self.items = feed.items
-			dispatch_sync(dispatch_get_main_queue(), {
-				self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+		dispatch_async(dispatch_get_main_queue(), {
+			let request: NSURLRequest = NSURLRequest(URL: NSURL(string: "https://ipsw.me/updates.rss")!)
+			RSSParser.parseFeedForRequest(request, callback: { (feed, error) in
+				guard let feed = feed else {
+					print(error)
+					return
+				}
+				
+				self.items = feed.items
+				dispatch_sync(dispatch_get_main_queue(), {
+					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+				})
+				
 			})
-			
 		})
     }
 
