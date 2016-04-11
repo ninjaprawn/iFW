@@ -47,10 +47,10 @@ if (typeof ipaddress === "undefined") {
 // Logging why node was killed
 var terminated = function(sig) {
     if (typeof sig === "string") {
-       console.log('%s: Received %s - terminating sample app ...', Date(Date.now()), sig);
+       console.log('%s: Received %s - terminating iFW-web ...', Date(Date.now()), sig);
        process.exit(1);
     }
-    console.log('%s: Node server stopped.', Date(Date.now()) );
+    console.log('%s: Node server stopped.', Date(Date.now()));
 };
 
 process.on('exit', function() {
@@ -64,7 +64,7 @@ signals.forEach(function(element, index, array) {
     });
 });
 
-// File cache so its faster to load the files
+// File cache so its faster to load the files and to request them from urls
 var fileCache = {};
 fileCache['index.html'] = fs.readFileSync('./index.html');
 
