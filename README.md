@@ -6,8 +6,8 @@ Thanks to <a href="https://twitter.com/pxtvr">peter</a> for the help and motivat
 
 State of Project
 ----------
-Project is currently 65% on the way. Currently on Push Notifications handling.
-Need to add Push Notifications handling, better API. Then bug fixes/enhancements.
+Project is currently 75% on the way. Currently on implementing a better API.
+Need to add a better API. Then bug fixes/enhancements.
 ETA: 15/04/16
 
 Note: I will be working on primarily the push notification handlers and api, but you might see some small changes in the files as I transition to my stuff to the app.
