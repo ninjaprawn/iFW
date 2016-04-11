@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DevicesViewController.swift
 //  iFW
 //
 //  Created by George Dan on 28/03/2016.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class ViewController: UITableViewController {
+class DevicesViewController: UITableViewController {
 
 	let realm = try! Realm()
 	var devices: Results<Device>!

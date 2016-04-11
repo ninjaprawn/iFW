@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BC2368731CA913F600B8BAF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368721CA913F600B8BAF1 /* AppDelegate.swift */; };
-		BC2368751CA913F600B8BAF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368741CA913F600B8BAF1 /* ViewController.swift */; };
+		BC2368751CA913F600B8BAF1 /* DevicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC2368741CA913F600B8BAF1 /* DevicesViewController.swift */; };
 		BC2368781CA913F600B8BAF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC2368761CA913F600B8BAF1 /* Main.storyboard */; };
 		BC23687D1CA913F600B8BAF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC23687C1CA913F600B8BAF1 /* Assets.xcassets */; };
 		BC2368801CA913F600B8BAF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */; };
@@ -31,7 +31,7 @@
 		5DBAF013688991A1F014F1B0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		BC23686F1CA913F600B8BAF1 /* iFW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iFW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC2368721CA913F600B8BAF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		BC2368741CA913F600B8BAF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BC2368741CA913F600B8BAF1 /* DevicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesViewController.swift; sourceTree = "<group>"; };
 		BC2368771CA913F600B8BAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BC23687C1CA913F600B8BAF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC23687F1CA913F600B8BAF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -101,19 +101,17 @@
 		BC2368711CA913F600B8BAF1 /* iFW */ = {
 			isa = PBXGroup;
 			children = (
-				BC33E2EA1CB2196900E4885B /* SwiftRSS */,
 				BC2368871CA913FC00B8BAF1 /* API Manager */,
+				BC68B5A41CBC6B17006B64AB /* Devices VCs */,
+				BC68B5A51CBC6B2C006B64AB /* News VCs */,
 				BC90BA101CB1C9E000F4FA67 /* Realm Objects */,
+				BC33E2EA1CB2196900E4885B /* SwiftRSS */,
 				BC2368721CA913F600B8BAF1 /* AppDelegate.swift */,
-				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
-				BC2368741CA913F600B8BAF1 /* ViewController.swift */,
 				BC2368761CA913F600B8BAF1 /* Main.storyboard */,
-				BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */,
 				BC23687C1CA913F600B8BAF1 /* Assets.xcassets */,
 				BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */,
 				BC2368811CA913F600B8BAF1 /* Info.plist */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
-				BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */,
 			);
 			path = iFW;
 			sourceTree = "<group>";
@@ -136,6 +134,24 @@
 				BC33E2EF1CB2197A00E4885B /* String+imageLinksFromHTML.swift */,
 			);
 			name = SwiftRSS;
+			sourceTree = "<group>";
+		};
+		BC68B5A41CBC6B17006B64AB /* Devices VCs */ = {
+			isa = PBXGroup;
+			children = (
+				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
+				BC2368741CA913F600B8BAF1 /* DevicesViewController.swift */,
+			);
+			name = "Devices VCs";
+			sourceTree = "<group>";
+		};
+		BC68B5A51CBC6B2C006B64AB /* News VCs */ = {
+			isa = PBXGroup;
+			children = (
+				BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */,
+				BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */,
+			);
+			name = "News VCs";
 			sourceTree = "<group>";
 		};
 		BC90BA101CB1C9E000F4FA67 /* Realm Objects */ = {
@@ -303,7 +319,7 @@
 				BCED75761CB6674000F6E00F /* Device.swift in Sources */,
 				BCBFFE441CB1EFFF00774B09 /* NewsTableViewController.swift in Sources */,
 				BC33E2F41CB2197A00E4885B /* String+imageLinksFromHTML.swift in Sources */,
-				BC2368751CA913F600B8BAF1 /* ViewController.swift in Sources */,
+				BC2368751CA913F600B8BAF1 /* DevicesViewController.swift in Sources */,
 				BC33E2F01CB2197A00E4885B /* NSDate+dateFromInternetDateTimeString.swift in Sources */,
 				BC2368731CA913F600B8BAF1 /* AppDelegate.swift in Sources */,
 			);
