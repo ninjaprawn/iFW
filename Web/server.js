@@ -9,7 +9,7 @@ var app = express();
 var sendNotification = function(data, callback) {
     var headers = {
         "Content-Type": "application/json",
-        "Authorization": "Basic 'yours'"
+        "Authorization": "Basic YzI0NDNlMzEtOGI4OS00NmVkLWE0ZTItMjQ0ZjJiYTM1ODZl"
     };
 
     var options = {
@@ -68,6 +68,8 @@ signals.forEach(function(element, index, array) {
 var fileCache = {};
 fileCache['index.html'] = fs.readFileSync('./index.html');
 
+var shouldUpdate = true;
+
 app.get("/", function(req, res) {
     res.setHeader('Content-Type', 'text/html');
     res.send(fileCache['index.html']);
@@ -76,7 +78,7 @@ app.get("/", function(req, res) {
 app.get("/pushNotification", function(req, res) {
     var content = req.query.content;
     var message = {
-      app_id: "'yours'",
+      app_id: "7c640baf-abda-4566-8f55-b52823242a51",
       contents: {"en": content},
       included_segments: ["All"]
     };
@@ -84,6 +86,23 @@ app.get("/pushNotification", function(req, res) {
     sendNotification(message, function(response) {
         res.json(JSON.parse(response));
     });
+});
+
+app.get("/updateAPI", function(req, res) {
+    shouldUpdate = true;
+    res.sendStatus(200);
+});
+
+app.get("/devices", function(req, res) {
+    if (shouldUpdate == true) {
+        fs.readFile(process.env.OPENSHIFT_DATA_DIR+'/devices.json', 'utf-8', function(err, content) {
+            if (err) throw err;
+            fileCache["devices.json"] = JSON.parse(content);
+            res.json(fileCache["devices.json"]);
+        });
+    } else {
+        res.json(fileCache["devices.json"]);
+    }
 });
 
 // Listen for start of server
