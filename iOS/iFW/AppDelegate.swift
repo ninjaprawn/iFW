@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Keys
 
 let height: CGFloat = 60
 
@@ -50,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		
 		// Push notification stuff (ty peter)
-		let oneSignal = OneSignal(launchOptions: launchOptions, appId: "Go away", handleNotification: nil)
+		let oneSignal = OneSignal(launchOptions: launchOptions, appId: IfwKeys().iFWOneSignalKey(), handleNotification: nil)
   
 		OneSignal.defaultClient().enableInAppAlertNotification(true)
 		requestPushes()
