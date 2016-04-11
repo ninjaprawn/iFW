@@ -52,34 +52,33 @@ class APIManager {
 			"User-Agent": "iOS/iFW-beta"
 		]
 		
-		// TODO: Create an online API type thing, so you can get the data more easily and quickly (openshift > heroku)
-		manager.request(.GET, "https://api.ipsw.me/v2.1/firmwares.json/condensed").responseJSON(completionHandler: { response in
+		manager.request(.GET, "http://ifw-ninjaprawn.rhcloud.com/devices").responseJSON(completionHandler: { response in
 			switch response.result {
 				case .Success:
 					if let value = response.result.value {
 						if self.checkSHA(response.data!.sha1.hexString) {
 							print("Data is the same! Don't need to do anything")
 						} else {
-							NSUserDefaults.standardUserDefaults().setObject(response.data!.sha1.hexString, forKey: "firmwares.json.sha1")
+							NSUserDefaults.standardUserDefaults().setObject(response.data!.sha1.hexString, forKey: "devicessha")
 							let json = JSON(value)
 							
 							// First time?
 							let realm = try! Realm()
 							if !self.shaExists() {
-								let devices = Array(json["devices"].dictionary!.keys)
+								let devices = Array(json.dictionary!.keys)
 								
 								for device in devices {
 									let newDevice = Device()
 									
 									newDevice.deviceID = device
-									newDevice.deviceCode = json["devices"][device]["BoardConfig"].stringValue
-									newDevice.deviceName = json["devices"][device]["name"].stringValue
+									newDevice.deviceCode = json[device]["BoardConfig"].stringValue
+									newDevice.deviceName = json[device]["name"].stringValue
 									
 									try! realm.write {
 										realm.add(newDevice)
 									}
 									
-									for firmware in json["devices"][device]["firmwares"].array! {
+									for firmware in json[device]["firmwares"].array! {
 										let newFirmware = Firmware()
 										
 										newFirmware.device = newDevice
@@ -108,17 +107,17 @@ class APIManager {
 								
 								// TODO: Make the below process for efficient. 5 loops ain't tooo good.
 								
-								var devices = Array(json["devices"].dictionary!.keys)
+								var devices = Array(json.dictionary!.keys)
 								
 								let realmDevices = realm.objects(Device)
 								for device in realmDevices {
 									devices.removeAtIndex(devices.indexOf(device.deviceID)!)
 									
 									try! realm.write {
-										device.deviceName = json["devices"][device.deviceID]["name"].stringValue
+										device.deviceName = json[device.deviceID]["name"].stringValue
 									}
 									
-									let firmwares = json["devices"][device.deviceID]["firmwares"].array!
+									let firmwares = json[device.deviceID]["firmwares"].array!
 									// BuildID : {version: "X.X", releasedate: "yyyy-MM-dd'T'HH:mm:ss'Z'", signed: bool, filename: "blah.ipsw"}
 									var formattedFirmwares = [String: [String: AnyObject]]()
 									
@@ -179,14 +178,14 @@ class APIManager {
 									let newDevice = Device()
 									
 									newDevice.deviceID = device
-									newDevice.deviceCode = json["devices"][device]["BoardConfig"].stringValue
-									newDevice.deviceName = json["devices"][device]["name"].stringValue
+									newDevice.deviceCode = json[device]["BoardConfig"].stringValue
+									newDevice.deviceName = json[device]["name"].stringValue
 									
 									try! realm.write {
 										realm.add(newDevice)
 									}
 									
-									for firmware in json["devices"][device]["firmwares"].array! {
+									for firmware in json[device]["firmwares"].array! {
 										let newFirmware = Firmware()
 										
 										newFirmware.device = newDevice
@@ -221,7 +220,7 @@ class APIManager {
 	}
 	
 	func checkSHA(sha: String) -> Bool {
-		if let storedSHA = NSUserDefaults.standardUserDefaults().stringForKey("firmwares.json.sha1") {
+		if let storedSHA = NSUserDefaults.standardUserDefaults().stringForKey("devicessha") {
 			if storedSHA == sha {
 				return true
 			}
@@ -230,7 +229,7 @@ class APIManager {
 	}
 	
 	func shaExists() -> Bool {
-		guard NSUserDefaults.standardUserDefaults().stringForKey("firmwares.json.sha1") != nil else {
+		guard NSUserDefaults.standardUserDefaults().stringForKey("devicessha") != nil else {
 			return false
 		}
 		return true
