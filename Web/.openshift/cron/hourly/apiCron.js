@@ -13,7 +13,7 @@ var options = {
 };
 
 var sendUpdateNotification = function() {
-    http.get('http://ifw-ninjaprawn.rhcloud.com/updateAPI', function(res) {
+    http.get('http://example.com/updateAPI', function(res) {
         console.log("Got response: " + res.statusCode);
         res.resume();
     }).on('error', function(e) {
