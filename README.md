@@ -7,12 +7,12 @@ Thanks to <a href="https://twitter.com/pxtvr">peter</a> for the help and motivat
 State of Project
 ----------
 Project is currently 85% on the way. Currently working on bug fixes/enhancements.
-ETA: 15/04/16
 
-Note: I will be working on primarily the push notification handlers and api, but you might see some small changes in the files as I transition to my stuff to the app.
+ETA: 15/04/16
 
 Building
 ----------
+<h4>iOS</h4>
 First, either download the repo or clone it:
 ```bash
 git clone https://github.com/ninjaprawn/iFW.git
@@ -22,6 +22,9 @@ Then install with CocoaPods:
 ```bash
 pod install
 ```
+
+<h4>Web</h4>
+Most of the details are discussed in that folder. Pretty much you have to change a lot of things when uploading the folder to OpenShift. I've only added the source so you can see what's going on.
 
 Libraries/Frameworks
 ----------
