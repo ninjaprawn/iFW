@@ -153,7 +153,7 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPg-Gk-QWB">
                                             <rect key="frame" x="15" y="11" width="570" height="20"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -172,7 +172,9 @@
                             <outlet property="delegate" destination="fxS-R5-oAR" id="RsP-QT-Gio"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="News" id="TxU-He-uq0"/>
+                    <navigationItem key="navigationItem" title="News" id="TxU-He-uq0">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="CSo-Yg-ysf"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMn-6F-bzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -303,7 +305,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="news" width="22" height="22"/>
-        <image name="phone" width="22" height="22"/>
+        <image name="news" width="32" height="32"/>
+        <image name="phone" width="32" height="32"/>
     </resources>
 </document>
