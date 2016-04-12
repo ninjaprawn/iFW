@@ -18,6 +18,7 @@
 		BC33E2F21CB2197A00E4885B /* RSSItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC33E2ED1CB2197A00E4885B /* RSSItem.swift */; };
 		BC33E2F31CB2197A00E4885B /* RSSParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC33E2EE1CB2197A00E4885B /* RSSParser.swift */; };
 		BC33E2F41CB2197A00E4885B /* String+imageLinksFromHTML.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC33E2EF1CB2197A00E4885B /* String+imageLinksFromHTML.swift */; };
+		BC9ADBFE1CBCBB1F00CCACE7 /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC9ADBFD1CBCBB1F00CCACE7 /* CustomNavigationController.swift */; };
 		BCA2F6DC1CAD10D000EF3DEB /* FirmwareTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */; };
 		BCBFFE441CB1EFFF00774B09 /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */; };
 		BCC8C4021CB7C14B004B446A /* NewsDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */; };
@@ -43,6 +44,7 @@
 		BC33E2ED1CB2197A00E4885B /* RSSItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSItem.swift; sourceTree = "<group>"; };
 		BC33E2EE1CB2197A00E4885B /* RSSParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSSParser.swift; sourceTree = "<group>"; };
 		BC33E2EF1CB2197A00E4885B /* String+imageLinksFromHTML.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+imageLinksFromHTML.swift"; sourceTree = "<group>"; };
+		BC9ADBFD1CBCBB1F00CCACE7 /* CustomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirmwareTableViewController.swift; sourceTree = "<group>"; };
 		BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
 		BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				BC90BA101CB1C9E000F4FA67 /* Realm Objects */,
 				BC33E2EA1CB2196900E4885B /* SwiftRSS */,
 				BC2368721CA913F600B8BAF1 /* AppDelegate.swift */,
+				BC9ADBFD1CBCBB1F00CCACE7 /* CustomNavigationController.swift */,
 				BC23687C1CA913F600B8BAF1 /* Assets.xcassets */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
 				BC2368811CA913F600B8BAF1 /* Info.plist */,
@@ -315,6 +318,7 @@
 				BC33E2F21CB2197A00E4885B /* RSSItem.swift in Sources */,
 				BC33E2F31CB2197A00E4885B /* RSSParser.swift in Sources */,
 				BCC8C4021CB7C14B004B446A /* NewsDetailTableViewController.swift in Sources */,
+				BC9ADBFE1CBCBB1F00CCACE7 /* CustomNavigationController.swift in Sources */,
 				BC2368891CA9151500B8BAF1 /* APIManager.swift in Sources */,
 				BCED75761CB6674000F6E00F /* Device.swift in Sources */,
 				BCBFFE441CB1EFFF00774B09 /* NewsTableViewController.swift in Sources */,

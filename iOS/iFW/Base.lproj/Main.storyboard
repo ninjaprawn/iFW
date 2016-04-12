@@ -190,10 +190,10 @@
             </objects>
             <point key="canvasLocation" x="2786" y="-360"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="gsZ-PE-b9W">
             <objects>
-                <navigationController id="GEi-ty-BKu" sceneMemberID="viewController">
+                <navigationController id="GEi-ty-BKu" customClass="CustomNavigationController" customModule="iFW" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="news" id="S1z-wa-K7U">
                         <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>
@@ -280,10 +280,10 @@
             </objects>
             <point key="canvasLocation" x="2079" y="327"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="Jqk-gA-d2n">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="whu-e3-mrM" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="whu-e3-mrM" customClass="CustomNavigationController" customModule="iFW" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="phone" id="mRI-Jb-xOn">
                         <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
                     </tabBarItem>

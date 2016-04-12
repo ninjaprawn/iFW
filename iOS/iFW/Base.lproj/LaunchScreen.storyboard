@@ -1,26 +1,103 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="676-gF-G46">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="EHf-IW-A2E">
+        <!--Recent News-->
+        <scene sceneID="U3i-NL-HpN">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Llm-lL-Icb"/>
-                        <viewControllerLayoutGuide type="bottom" id="xb3-aO-Qok"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WM3-9a-YTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="j1i-Zv-vp0" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="JKD-9G-4rD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <connections>
+                            <outlet property="dataSource" destination="j1i-Zv-vp0" id="6R0-d9-9yY"/>
+                            <outlet property="delegate" destination="j1i-Zv-vp0" id="Z70-hQ-k1i"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Recent News" id="JJn-ht-v83"/>
+                </tableViewController>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="1615" y="405"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6Ko-i0-Qxe">
+            <objects>
+                <navigationController id="uFz-rc-q36" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="news" id="Hqf-8d-4OB">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tEq-Xn-Fxv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.25490196078431371" green="0.51372549019607838" blue="0.84313725490196079" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="j1i-Zv-vp0" kind="relationship" relationship="rootViewController" id="bFQ-T5-CyS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O2Q-vM-ubS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="795" y="405"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="qKr-aT-UuQ">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ECg-BZ-PNF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="676-gF-G46" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="VOh-mI-LCI">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.17254901960784313" green="0.24313725490196078" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="selectedImageTintColor" red="0.17254901959999999" green="0.24313725489999999" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tintColor">
+                                <color key="value" red="0.17254901960784313" green="0.24391163793103449" blue="0.31317349137931028" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </tabBar>
+                    <connections>
+                        <segue destination="uFz-rc-q36" kind="relationship" relationship="viewControllers" id="E6i-jT-Yyp"/>
+                        <segue destination="fPJ-Xs-Gmb" kind="relationship" relationship="viewControllers" id="V1U-ca-71h"/>
+                    </connections>
+                </tabBarController>
+            </objects>
+            <point key="canvasLocation" x="-73" y="790"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BQN-fu-iEh">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZC7-Tc-Kyg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController id="fPJ-Xs-Gmb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="phone" id="Hrr-ki-Ic2">
+                        <inset key="imageInsets" minX="0.0" minY="5.5" maxX="0.0" maxY="-5.5"/>
+                    </tabBarItem>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oBe-WS-QTG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.25490196079999999" green="0.51372549020000002" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
+                    </navigationBar>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="795" y="1075"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="news" width="32" height="32"/>
+        <image name="phone" width="32" height="32"/>
+    </resources>
 </document>
