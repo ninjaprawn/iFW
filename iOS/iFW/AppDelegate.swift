@@ -25,7 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		
 		// Push notification stuff (ty peter)
-		let oneSignal = OneSignal(launchOptions: launchOptions, appId: IfwKeys().iFWOneSignalKey(), handleNotification: nil)
+		let oneSignal = OneSignal(launchOptions: launchOptions, appId: IfwKeys().iFWOneSignalKey(), handleNotification: { (message, data, active) in
+			if !active {
+				NSUserDefaults.standardUserDefaults().setObject(message, forKey: "notificationTitle")
+			}
+		})
   
 		OneSignal.defaultClient().enableInAppAlertNotification(true)
 		requestPushes()

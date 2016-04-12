@@ -32,7 +32,6 @@ class NewsTableViewController: UITableViewController {
 		titleLabel.text = items[indexPath.row].title
 		
 		let dateFormatter = NSDateFormatter()
-		// TODO: Localize date (format + timezone)
 		dateFormatter.dateStyle = .ShortStyle
 		dateFormatter.timeStyle = .NoStyle
 		dateFormatter.locale = NSLocale.currentLocale()
@@ -63,6 +62,25 @@ class NewsTableViewController: UITableViewController {
 		navigationItem.backBarButtonItem = backItem
 	}
 	
+	func openCell(indexPath: NSIndexPath) {
+		self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+		self.performSegueWithIdentifier("postDetail", sender: tableView.cellForRowAtIndexPath(indexPath)!)
+		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+	}
+	
+	func findItemWithTitle(title: String) -> Int? {
+		var index: Int? = nil
+		
+		self.items.enumerate().forEach({ (ind, item) in
+			if item.title == title {
+				index = ind
+				return
+			}
+		})
+		
+		return index
+	}
+	
 	func beginActivity() {
 		self.oldRightButton = self.navigationItem.rightBarButtonItem!
 		let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
@@ -91,6 +109,12 @@ class NewsTableViewController: UITableViewController {
 				dispatch_sync(dispatch_get_main_queue(), {
 					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
 					self.stopActivity()
+					if let title = NSUserDefaults.standardUserDefaults().stringForKey("notificationTitle") {
+						if let index = self.findItemWithTitle(title) {
+							self.openCell(NSIndexPath(forRow: index, inSection: 0))
+						}
+						NSUserDefaults.standardUserDefaults().removeObjectForKey("notificationTitle")
+					}
 				})
 				
 			})
