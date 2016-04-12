@@ -13,15 +13,12 @@ class DevicesViewController: UITableViewController {
 
 	let realm = try! Realm()
 	var devices: Results<Device>!
+	var oldRightButton: UIBarButtonItem!
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		dispatch_async(dispatch_get_main_queue(), {
-			APIManager().downloadInfo({
-				self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-			})
-		})
+		self.fetchDevices()
 		devices = realm.objects(Device).sorted("deviceName")
 	}
 
@@ -69,6 +66,33 @@ class DevicesViewController: UITableViewController {
 		let backItem = UIBarButtonItem()
 		backItem.title = ""
 		navigationItem.backBarButtonItem = backItem
+	}
+	
+	func beginActivity() {
+		self.oldRightButton = self.navigationItem.rightBarButtonItem!
+		let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+		indicator.startAnimating()
+		let item = UIBarButtonItem(customView: indicator)
+		
+		self.navigationItem.rightBarButtonItem = item
+	}
+	
+	func stopActivity() {
+		self.navigationItem.rightBarButtonItem = self.oldRightButton
+	}
+	
+	func fetchDevices() {
+		self.beginActivity()
+		dispatch_async(dispatch_get_main_queue(), {
+			APIManager().downloadInfo({
+				self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+				self.stopActivity()
+			})
+		})
+	}
+	
+	@IBAction func refreshDevices(sender: UIBarButtonItem) {
+		self.fetchDevices()
 	}
 	
 }

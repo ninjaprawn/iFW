@@ -268,7 +268,13 @@
                             <outlet property="delegate" destination="rpF-lj-bcS" id="Of0-GE-rxZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Devices" id="iDL-uu-KDa"/>
+                    <navigationItem key="navigationItem" title="Devices" id="iDL-uu-KDa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="tzt-BH-Nju">
+                            <connections>
+                                <action selector="refreshDevices:" destination="rpF-lj-bcS" id="Eeg-KA-psQ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17y-1F-Nk7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
