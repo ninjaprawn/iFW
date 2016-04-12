@@ -107,11 +107,11 @@
 				BC90BA101CB1C9E000F4FA67 /* Realm Objects */,
 				BC33E2EA1CB2196900E4885B /* SwiftRSS */,
 				BC2368721CA913F600B8BAF1 /* AppDelegate.swift */,
-				BC2368761CA913F600B8BAF1 /* Main.storyboard */,
 				BC23687C1CA913F600B8BAF1 /* Assets.xcassets */,
-				BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */,
-				BC2368811CA913F600B8BAF1 /* Info.plist */,
 				BC23688C1CA9164C00B8BAF1 /* Bridging.h */,
+				BC2368811CA913F600B8BAF1 /* Info.plist */,
+				BC23687E1CA913F600B8BAF1 /* LaunchScreen.storyboard */,
+				BC2368761CA913F600B8BAF1 /* Main.storyboard */,
 			);
 			path = iFW;
 			sourceTree = "<group>";
@@ -139,8 +139,8 @@
 		BC68B5A41CBC6B17006B64AB /* Devices VCs */ = {
 			isa = PBXGroup;
 			children = (
-				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
 				BC2368741CA913F600B8BAF1 /* DevicesViewController.swift */,
+				BCA2F6DB1CAD10D000EF3DEB /* FirmwareTableViewController.swift */,
 			);
 			name = "Devices VCs";
 			sourceTree = "<group>";
@@ -148,8 +148,8 @@
 		BC68B5A51CBC6B2C006B64AB /* News VCs */ = {
 			isa = PBXGroup;
 			children = (
-				BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */,
 				BCC8C4011CB7C14B004B446A /* NewsDetailTableViewController.swift */,
+				BCBFFE431CB1EFFF00774B09 /* NewsTableViewController.swift */,
 			);
 			name = "News VCs";
 			sourceTree = "<group>";

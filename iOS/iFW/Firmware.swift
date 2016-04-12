@@ -10,15 +10,6 @@ import Foundation
 import RealmSwift
 
 class Firmware: Object {
-    
-	/*
-	@NSManaged var version: String?
-	@NSManaged var buildID: String?
-	@NSManaged var releaseDate: NSDate?
-	@NSManaged var signed: NSNumber?
-	@NSManaged var filename: String?
-	@NSManaged var device: Device?
-	*/
 	
 	dynamic var buildID = ""
 	dynamic var filename = ""

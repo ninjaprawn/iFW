@@ -67,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	// This is from https://github.com/dzt/ftp/blob/master/ios/FTP/AppDelegate.swift.
 	
 	func requestPushes() {
-		
 		let settings = UIUserNotificationSettings(forTypes: [.Badge, .Alert], categories: nil)
 		UIApplication.sharedApplication().registerUserNotificationSettings(settings)
 		UIApplication.sharedApplication().registerForRemoteNotifications()
@@ -75,7 +74,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	
 	func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
 		print(deviceToken.description)
-		
 	}
 	
 	func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {

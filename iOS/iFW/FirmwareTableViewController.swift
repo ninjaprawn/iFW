@@ -18,13 +18,7 @@ class FirmwareTableViewController: UITableViewController {
         self.title = device.deviceName
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return device.firmwares.count
     }
 

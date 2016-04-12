@@ -25,12 +25,6 @@ class DevicesViewController: UITableViewController {
 		devices = realm.objects(Device).sorted("deviceName")
 	}
 
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-
-
 	override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 		if devices.count > 0 {
 			return devices.count
@@ -50,7 +44,7 @@ class DevicesViewController: UITableViewController {
 		} else {
 			let cell = tableView.dequeueReusableCellWithIdentifier("title", forIndexPath: indexPath)
 			
-			cell.textLabel?.text = "No devices found in Realm"
+			cell.textLabel?.text = "No devices found. Please wait..."
 			
 			return cell
 		}
@@ -58,7 +52,7 @@ class DevicesViewController: UITableViewController {
 	}
 	
 	override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return "Count: \(devices.count)"
+		return "Number of devices: \(devices.count)"
 	}
 	
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
