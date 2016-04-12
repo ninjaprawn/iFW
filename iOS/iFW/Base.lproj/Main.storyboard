@@ -173,7 +173,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="News" id="TxU-He-uq0">
-                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="CSo-Yg-ysf"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="CSo-Yg-ysf">
+                            <connections>
+                                <action selector="shareButtonPressed:" destination="fxS-R5-oAR" id="s93-zi-5Ke"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hMn-6F-bzJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

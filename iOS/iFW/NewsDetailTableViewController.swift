@@ -71,4 +71,14 @@ class NewsDetailTableViewController: UITableViewController {
 	override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
+	
+	@IBAction func shareButtonPressed(sender: UIBarButtonItem) {
+		let activityItems = ["\(post.title!) (\(post.links[0].absoluteString)) via iFW"]
+		let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+		
+		activityController.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAirDrop, UIActivityTypePostToFlickr]
+		
+		self.presentViewController(activityController, animated: true, completion: nil)
+	}
+	
 }
