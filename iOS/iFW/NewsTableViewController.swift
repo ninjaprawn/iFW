@@ -11,26 +11,11 @@ import UIKit
 class NewsTableViewController: UITableViewController {
 
 	var items = [RSSItem]()
+	var oldRightButton: UIBarButtonItem!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-		// TODO: Rewrite RSSParser for just this case. Sideproject - Rewrite SwiftRSS and maintain it
-		dispatch_async(dispatch_get_main_queue(), {
-			let request: NSURLRequest = NSURLRequest(URL: NSURL(string: "https://ipsw.me/updates.rss")!)
-			RSSParser.parseFeedForRequest(request, callback: { (feed, error) in
-				guard let feed = feed else {
-					print(error)
-					return
-				}
-				
-				self.items = feed.items
-				dispatch_sync(dispatch_get_main_queue(), {
-					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
-				})
-				
-			})
-		})
+		self.fetchNews()
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,5 +67,44 @@ class NewsTableViewController: UITableViewController {
 		backItem.title = ""
 		navigationItem.backBarButtonItem = backItem
 	}
+	
+	func beginActivity() {
+		self.oldRightButton = self.navigationItem.rightBarButtonItem!
+		let indicator = UIActivityIndicatorView(activityIndicatorStyle: .White)
+		indicator.startAnimating()
+		let item = UIBarButtonItem(customView: indicator)
+		
+		self.navigationItem.rightBarButtonItem = item
+	}
+	
+	func stopActivity() {
+		self.navigationItem.rightBarButtonItem = self.oldRightButton
+	}
+	
+	func fetchNews() {
+		self.beginActivity()
+		dispatch_async(dispatch_get_main_queue(), {
+			let request: NSURLRequest = NSURLRequest(URL: NSURL(string: "https://ipsw.me/updates.rss")!)
+			RSSParser.parseFeedForRequest(request, callback: { (feed, error) in
+				guard let feed = feed else {
+					print(error)
+					self.stopActivity()
+					return
+				}
+				
+				self.items = feed.items
+				dispatch_sync(dispatch_get_main_queue(), {
+					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+					self.stopActivity()
+				})
+				
+			})
+		})
+	}
+	
+	@IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+		self.fetchNews()
+	}
+	
 
 }

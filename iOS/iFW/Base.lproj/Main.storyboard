@@ -98,7 +98,13 @@
                             <outlet property="delegate" destination="dud-Hs-wcN" id="f3B-L8-sX7"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recent News" id="iJb-kW-Dcp"/>
+                    <navigationItem key="navigationItem" title="Recent News" id="iJb-kW-Dcp">
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="E3O-3f-Tzl">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="dud-Hs-wcN" id="LGL-Z8-Xki"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hzr-sI-FBE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
