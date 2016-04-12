@@ -8,15 +8,22 @@
 
 import UIKit
 
-class NewsTableViewController: UITableViewController {
+class NewsTableViewController: UITableViewController, AppNotificationDelegate {
 
 	var items = [RSSItem]()
 	var oldRightButton: UIBarButtonItem!
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
 		self.fetchNews()
     }
+	
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(true)
+		
+		(UIApplication.sharedApplication().delegate as! AppDelegate).notificationDelegate = self
+	}
 	
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
@@ -53,8 +60,12 @@ class NewsTableViewController: UITableViewController {
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
 		if segue.identifier == "postDetail" {
 			let destVC = segue.destinationViewController as! NewsDetailTableViewController
-			let index = self.tableView.indexPathForCell((sender as! UITableViewCell))!.row
-			destVC.post = items[index]
+			if let indexPath = sender as? NSIndexPath {
+				destVC.post = items[indexPath.row]
+			} else if let cell = sender as? UITableViewCell {
+				let index = self.tableView.indexPathForCell(cell)!.row
+				destVC.post = items[index]
+			}
 		}
 		
 		let backItem = UIBarButtonItem()
@@ -64,7 +75,7 @@ class NewsTableViewController: UITableViewController {
 	
 	func openCell(indexPath: NSIndexPath) {
 		self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
-		self.performSegueWithIdentifier("postDetail", sender: tableView.cellForRowAtIndexPath(indexPath)!)
+		self.performSegueWithIdentifier("postDetail", sender: indexPath)
 		self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
 	}
 	
@@ -110,8 +121,8 @@ class NewsTableViewController: UITableViewController {
 					self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
 					self.stopActivity()
 					if let title = NSUserDefaults.standardUserDefaults().stringForKey("notificationTitle") {
-						if let index = self.findItemWithTitle(title) {
-							self.openCell(NSIndexPath(forRow: index, inSection: 0))
+						if let indexForTitle = self.findItemWithTitle(title) {
+							self.openCell(NSIndexPath(forRow: indexForTitle, inSection: 0))
 						}
 						NSUserDefaults.standardUserDefaults().removeObjectForKey("notificationTitle")
 					}
@@ -122,6 +133,11 @@ class NewsTableViewController: UITableViewController {
 	}
 	
 	@IBAction func refreshButtonPressed(sender: UIBarButtonItem) {
+		self.fetchNews()
+	}
+	
+	func appDidReceiveNotificationWithMessage(message: String) {
+		NSUserDefaults.standardUserDefaults().setObject(message, forKey: "notificationTitle")
 		self.fetchNews()
 	}
 	

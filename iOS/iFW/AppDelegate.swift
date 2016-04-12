@@ -9,10 +9,15 @@
 import UIKit
 import Keys
 
+protocol AppNotificationDelegate {
+	func appDidReceiveNotificationWithMessage(message: String)
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	var window: UIWindow?
+	var notificationDelegate: AppNotificationDelegate? = nil
 
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
@@ -25,13 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		
 		// Push notification stuff (ty peter)
-		let oneSignal = OneSignal(launchOptions: launchOptions, appId: IfwKeys().iFWOneSignalKey(), handleNotification: { (message, data, active) in
-			if !active {
+		let _ = OneSignal(launchOptions: launchOptions, appId: IfwKeys().iFWOneSignalKey(), handleNotification: { (message, data, active) in
+			print(self.notificationDelegate)
+			if let delegate = self.notificationDelegate {
+				delegate.appDidReceiveNotificationWithMessage(message)
+			} else {
 				NSUserDefaults.standardUserDefaults().setObject(message, forKey: "notificationTitle")
 			}
 		})
   
-		OneSignal.defaultClient().enableInAppAlertNotification(true)
+		OneSignal.defaultClient().enableInAppAlertNotification(false)
 		requestPushes()
 		
 		application.applicationIconBadgeNumber = 0
