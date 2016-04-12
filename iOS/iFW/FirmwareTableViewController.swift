@@ -31,6 +31,8 @@ class FirmwareTableViewController: UITableViewController {
 		
 		if device.firmwares[indexPath.row].signed {
 			cell.accessoryType = .Checkmark
+		} else {
+			cell.accessoryType = .None
 		}
 
         return cell
