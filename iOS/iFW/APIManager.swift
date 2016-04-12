@@ -105,105 +105,80 @@ class APIManager {
 							// Exists!
 							} else {
 								
-								// TODO: Make the below process for efficient. 5 loops ain't tooo good.
+								// Ayy 1 loop
 								
-								var devices = Array(json.dictionary!.keys)
+								let devices = Array(json.dictionary!.keys)
 								
-								let realmDevices = realm.objects(Device)
-								for device in realmDevices {
-									devices.removeAtIndex(devices.indexOf(device.deviceID)!)
-									
-									try! realm.write {
-										device.deviceName = json[device.deviceID]["name"].stringValue
-									}
-									
-									let firmwares = json[device.deviceID]["firmwares"].array!
-									// BuildID : {version: "X.X", releasedate: "yyyy-MM-dd'T'HH:mm:ss'Z'", signed: bool, filename: "blah.ipsw"}
-									var formattedFirmwares = [String: [String: AnyObject]]()
-									
-									for firmware in firmwares {
-										var currentFirmware = [String: AnyObject]()
-										currentFirmware["version"] = firmware["version"].stringValue
-										currentFirmware["filename"] = firmware["filename"].stringValue
-										currentFirmware["releasedate"] = firmware["releasedate"].stringValue
-										currentFirmware["signed"] = firmware["signed"].boolValue
+								for device in devices {
+									let storedDevices = realm.objects(Device).filter("deviceID = '\(device)'")
+									if storedDevices.count > 0 {
+										let currentDevice = storedDevices[0]
+										try! realm.write {
+											currentDevice.deviceName = json[currentDevice.deviceID]["name"].stringValue
+										}
 										
-										formattedFirmwares[firmware["buildid"].stringValue] = currentFirmware
-									}
-									
-									// Oops, another loop????
-									for firmware in device.firmwares {
-										if Array(formattedFirmwares.keys).contains(firmware.buildID) {
+										let firmwares = json[currentDevice.deviceID]["firmwares"].array!
+										
+										for firmware in firmwares {
+											let storedFirmwares = realm.objects(Firmware).filter("device.deviceID = '\(currentDevice.deviceID)' AND version = '\(firmware["version"].stringValue)'")
+											if storedFirmwares.count > 0 {
+												try! realm.write {
+													storedFirmwares[0].signed = firmware["signed"].boolValue
+													storedFirmwares[0].filename = firmware["filename"].stringValue
+												}
+											} else {
+												let newFirmware = Firmware()
+												
+												newFirmware.device = currentDevice
+												newFirmware.buildID = firmware["buildid"].stringValue
+												newFirmware.version = firmware["version"].stringValue
+												newFirmware.filename = firmware["filename"].stringValue
+												newFirmware.signed = firmware["signed"].boolValue
+												let stringDate = firmware["releasedate"].stringValue
+												
+												let dateFormatter = NSDateFormatter()
+												dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+												dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+												
+												newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
+												
+												try! realm.write {
+													realm.add(newFirmware)
+													currentDevice.firmwares.append(newFirmware)
+												}
+											}
+										}
+									} else {
+										let newDevice = Device()
+										
+										newDevice.deviceID = device
+										newDevice.deviceCode = json[device]["BoardConfig"].stringValue
+										newDevice.deviceName = json[device]["name"].stringValue
+										
+										try! realm.write {
+											realm.add(newDevice)
+										}
+										
+										for firmware in json[device]["firmwares"].array! {
+											let newFirmware = Firmware()
+											
+											newFirmware.device = newDevice
+											newFirmware.buildID = firmware["buildid"].stringValue
+											newFirmware.version = firmware["version"].stringValue
+											newFirmware.filename = firmware["filename"].stringValue
+											newFirmware.signed = firmware["signed"].boolValue
+											let stringDate = firmware["releasedate"].stringValue
+											
+											let dateFormatter = NSDateFormatter()
+											dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+											dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
+											
+											newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
 											
 											try! realm.write {
-												firmware.signed = formattedFirmwares[firmware.buildID]!["signed"] as! Bool
-												firmware.filename = formattedFirmwares[firmware.buildID]!["filename"] as! String
+												realm.add(newFirmware)
+												newDevice.firmwares.append(newFirmware)
 											}
-												
-											formattedFirmwares.removeValueForKey(firmware.buildID)
-											
-										}
-									}
-									
-									// Last loop for any new firmwares
-									// Yes, another one
-									for firmware in Array(formattedFirmwares.keys) {
-										let currentFirmware = formattedFirmwares[firmware]!
-										
-										let newFirmware = Firmware()
-										
-										newFirmware.device = device
-										newFirmware.buildID = firmware
-										newFirmware.version = (currentFirmware["version"] as! String)
-										newFirmware.filename = (currentFirmware["filename"] as! String)
-										newFirmware.signed = currentFirmware["signed"] as! Bool
-										let stringDate = currentFirmware["releasedate"] as! String
-										
-										let dateFormatter = NSDateFormatter()
-										dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-										dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-										
-										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
-										
-										try! realm.write {
-											realm.add(newFirmware)
-											device.firmwares.append(newFirmware)
-										}
-
-									}
-								}
-								
-								// Remaining devices
-								for device in devices {
-									let newDevice = Device()
-									
-									newDevice.deviceID = device
-									newDevice.deviceCode = json[device]["BoardConfig"].stringValue
-									newDevice.deviceName = json[device]["name"].stringValue
-									
-									try! realm.write {
-										realm.add(newDevice)
-									}
-									
-									for firmware in json[device]["firmwares"].array! {
-										let newFirmware = Firmware()
-										
-										newFirmware.device = newDevice
-										newFirmware.buildID = firmware["buildid"].stringValue
-										newFirmware.version = firmware["version"].stringValue
-										newFirmware.filename = firmware["filename"].stringValue
-										newFirmware.signed = firmware["signed"].boolValue
-										let stringDate = firmware["releasedate"].stringValue
-										
-										let dateFormatter = NSDateFormatter()
-										dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
-										dateFormatter.timeZone = NSTimeZone(forSecondsFromGMT: 0)
-										
-										newFirmware.releaseDate = dateFormatter.dateFromString(stringDate)
-										
-										try! realm.write {
-											realm.add(newFirmware)
-											newDevice.firmwares.append(newFirmware)
 										}
 									}
 								}
