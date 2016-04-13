@@ -6,9 +6,13 @@ Thanks to <a href="https://twitter.com/pxtvr">peter</a> for the help and motivat
 
 State of Project
 ----------
-Project is currently 85% on the way. Currently working on bug fixes/enhancements.
+Submitted to App Store. Now we wait :)
 
-ETA: 15/04/16
+1.1 plans:
+- Faster devices processing
+- Cache RSS news stuff
+- Device/version specific notifications
+- Anything else, submit via Twitter or issues
 
 Building
 ----------
