@@ -1,0 +1,14 @@
+language: objective-c
+
+osx_image: xcode7.3
+
+xcode_sdk: iphoneos9.3
+
+podfile: iOS/Podfile
+
+xcode_workspace: iOS/iFW.xcworkspace # path to your xcodeproj folder
+xcode_scheme: iFW
+
+before_install:
+  - brew update
+  - brew uninstall xctool && brew install --HEAD xctool
