@@ -13,7 +13,7 @@ env:
   global:
   -   secure: "fx4hab5b71Ug31vsy2VeSuwpWbZPMTVAOUW59fNfMLYsTO4JMSd1VBJOhqWzfFc0bjvTUAgXMaZCfi31w7pFcM8Bmm+eCHu0IxkGXuJxZnXBWKAb7I+NzYy5ZJXSyvIHG8tCDZ8hRVWJSk9eIfB25DhTsGxiqttLmZfMu1oT0svAIwzSNCdaGSzxYEBcNRgtD9lBx7PAgc5Apgs6OW8zV9Y/Jzz15FaFfb5jtB9zrPTFYXNOK3x1YrZaPjb6pGfkwixncaXBJKKF4aw3I+53Y9dpn/GPH6no7bc4sllfMMyvxZmLgrsUASdsPKN8EUuyoRsgSGOegBTRpzQZ8N117nkqINrTIQBQcZeZClKmrIv2CFbM/Hd5jBojoZbgok6P6FmpLI8Alqj/ZSQNEFMLxaeFs4O2UMNWH64R7gtiVn7dOPIa0mqeVgcyhPymyTJnH/xweKKSdTTNj57EG91IqaiYQYxjNViy4I66aznaXAH0PD5GU+QEmz3wq9dXSJCiA0bBTtMO7IoXnjEu7KQI4x+6J1WSkhEdQ5v95Fjee5IDwL/Qqo1BpMEmkcZdPkv3lpsHRfVsfmTfbyKN2jsePjN1+RZqvmAygrz9PRVyIdOMCJotzvPIyHXP9nVnJtP9K+61YITMY5PbYHGT9BXuIpe/OEGicm7w8Q3wzynsTik="
 
-script: xctool -workspace iOS/iFW.xcworkspace -scheme iFW -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6 Plus' clean build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+script: xctool -workspace iOS/iFW.xcworkspace -scheme iFW -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6 Plus' clean build test CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
 before_install:
   - brew update
