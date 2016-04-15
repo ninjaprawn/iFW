@@ -17,4 +17,4 @@ before_install:
   - brew update
   - brew uninstall xctool && brew install --HEAD xctool
   - gem install cocoapods-keys
-  - bundle exec pod keys set iFWOneSignalKey $iFWAPIKEY
+  - pod keys set iFWOneSignalKey $iFWAPIKEY
