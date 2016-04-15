@@ -12,3 +12,4 @@ xcode_scheme: iFW
 before_install:
   - brew update
   - brew uninstall xctool && brew install --HEAD xctool
+  - gem install cocoapods-keys
